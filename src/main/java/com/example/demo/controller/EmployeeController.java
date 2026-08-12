@@ -33,4 +33,12 @@ public class EmployeeController {
     public Employee getEmployeeById(@PathVariable Long id) {
         return employeeService.getEmployeeById(id);
     }
+    public Employee updateEmp(Long id,Employee employee){
+        Employee existing = employeeRepository.findById(id).orElseThrow(()-> new RuntimeException("Employee not found"));
+        existing.setName(employee.getName());
+        existing.setEmail(employee.getEmail());
+
+        return employeeRepository.save(existing);
+
+       }
 }
