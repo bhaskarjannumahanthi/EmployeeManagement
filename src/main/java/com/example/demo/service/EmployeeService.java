@@ -29,4 +29,13 @@ public class EmployeeService {
     public Employee getEmployeeById(Long id) {
         return employeeRepository.findById(id).orElse(null);
     }
+    // Update
+    public Employee updateEmp(Long id,Employee employee){
+        Employee existing = employeeRepository.findById(id).orElseThrow(()-> new RuntimeException("Employee not found"));
+        existing.setName(employee.getName());
+        existing.setEmail(employee.getEmail());
+
+        return employeeRepository.save(existing);
+
+       }
 }
